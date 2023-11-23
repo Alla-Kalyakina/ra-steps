@@ -41,6 +41,8 @@ function App() {
     }
     return 0;
   });
+
+  console.log(arrForm)
   
   return (
     <>
