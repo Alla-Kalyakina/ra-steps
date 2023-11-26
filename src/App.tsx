@@ -4,6 +4,8 @@ import './App.css'
 import AddingData from './components/AddingData'
 
 export interface Form {
+  find(arg0: (elem: Form) => boolean): Form
+  push(entry: Form): number
   date: string
   distance: number
 }
@@ -15,7 +17,7 @@ function App() {
     distance: 0
   })
 
-  const [arrForm, setArrForm] = useState<Form[]>([form])
+  const [arrForm, setArrForm] = useState<Form[]>([])
 
   const handleFormChange = ({target}: React.FormEvent<HTMLInputElement>) => {
     const {name, value} = target as HTMLInputElement;
@@ -40,10 +42,20 @@ function App() {
       return 1;
     }
     return 0;
-  });
+  })
 
-  console.log(arrForm)
-  
+  const acc = arrForm.reduce((acc, entry) => {
+    const date = entry.date
+    const repeatElem = acc.find(elem => elem.date === date)
+    if(repeatElem !== undefined){
+      repeatElem.distance += entry.distance
+    } else {
+        acc.push(entry)
+    }
+    console.log(acc)
+    return acc
+  }, [])
+
   return (
     <>
       <form action="/" method="post" onSubmit={handleFormSubmit}>
@@ -67,7 +79,7 @@ function App() {
           </div>
           <button className="btn" type="submit">OK</button>
       </form>
-      <AddingData arrForm={arrForm}
+      <AddingData arrForm={acc}
       handleClickRemove={handleClickRemove}/>
     </>
   )
