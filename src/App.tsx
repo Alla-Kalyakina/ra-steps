@@ -1,11 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { useState } from 'react'
+import { HTMLProps, useState } from 'react'
 import './App.css'
 import AddingData from './components/AddingData'
 
 export interface Form {
-  find(arg0: (elem: Form) => boolean): Form
-  push(entry: Form): number
   date: string
   distance: number
 }
@@ -22,7 +20,6 @@ function App() {
   const handleFormChange = ({target}: React.FormEvent<HTMLInputElement>) => {
     const {name, value} = target as HTMLInputElement;
     setForm(preform => ({...preform, [name]: value}))
-    
   }
   
   const handleFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -46,7 +43,7 @@ function App() {
 
   const acc = arrForm.reduce((acc, entry) => {
     const date = entry.date
-    const repeatElem = acc.find(elem => elem.date === date)
+    const repeatElem: Form = acc.find(elem => elem.date === date)
     if(repeatElem !== undefined){
       repeatElem.distance += entry.distance
     } else {
