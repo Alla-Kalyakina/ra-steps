@@ -16,14 +16,12 @@ export default function Form() {
 
   const [arrForm, setArrForm] = useState<Form[]>([])
 
-  const handleDataChange = ({target}: React.FormEvent<HTMLInputElement>) => {
-    const {name, value} = target as HTMLInputElement;
-    setForm(preform => ({...preform, [name]: value}))
+  const handleDataChange = (e: { target: { name: string; value: string } }) => {
+    setForm(preform => ({...preform, [e.target.name]: e.target.value}))
   }
 
-  const handleDistanceChange = ({target}: React.FormEvent<HTMLInputElement>) => {
-    const {name, value} = target as HTMLInputElement;
-    setForm(preform => ({...preform, [name]: Number(value)}))
+  const handleDistanceChange = (e: { target: { name: number; value: number } }) => {
+    setForm(preform => ({...preform, [e.target.name]: Number(e.target.value)}))
   }
   
   const handleFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
