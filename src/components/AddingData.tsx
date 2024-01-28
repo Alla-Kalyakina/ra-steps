@@ -1,13 +1,19 @@
+import { Form } from "./Form"
 
-export default function AddingData(arrForm, handleClickRemove) {
+interface AddingDataPrors {
+    arrForm: Form[];
+    handleClickRemove: (date: string) => void,
+}
+
+export default function AddingData({arrForm, handleClickRemove} : AddingDataPrors ) {
 
     return (
         <>
-            <div>{arrForm.arrForm.map((elem, index) => 
+            <div>{arrForm.map((elem, index) => 
                 <div key={index}>
                     <div className="date">{elem.date}</div>
                     <div className="distance">{elem.distance}</div>
-                    <button onClick={()=>handleClickRemove(elem.date, elem.distance)}>✘</button>
+                    <button onClick={()=>handleClickRemove(elem.date)}>✘</button>
                 </div>
              )}</div>
         </>

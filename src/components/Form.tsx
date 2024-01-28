@@ -20,7 +20,7 @@ export default function Form() {
     setForm(preform => ({...preform, [e.target.name]: e.target.value}))
   }
 
-  const handleDistanceChange = (e: { target: { name: number; value: number } }) => {
+  const handleDistanceChange = (e: { target: { name: string; value: string } }) => {
     setForm(preform => ({...preform, [e.target.name]: Number(e.target.value)}))
   }
   
@@ -39,8 +39,8 @@ export default function Form() {
     }, []))
   }
 
-  function handleClickRemove(date: string, distance: number) {
-    setArrForm(arrForm.filter((elem)=> (elem.date != date && elem.distance != distance)));    
+  const handleClickRemove = (date: string) => {
+     setArrForm(arrForm.filter(elem => elem.date !== date));    
   }
 
   arrForm.sort((a, b) => {
